@@ -13,7 +13,8 @@ module.exports = {
         fonts: [
           {
             family: `Montserrat`,
-            variants: [`400`, `600`, `700`]
+            variants: [`400`, `600`, `700`],
+            subsets: ['latin-ext'],
           },
         ],
       },
