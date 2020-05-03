@@ -1,6 +1,4 @@
 import React from "react"
-import Navigation from '../components/Navigation/navigation';
-
 
 const IndexPage = () => (
   <>
