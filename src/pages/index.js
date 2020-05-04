@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Image from 'gatsby-image';
 import { Button } from "../components/Button/button";
 
 const ContentWrapper = styled.div`
@@ -23,8 +24,8 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const ImageWrapper = styled.img`
-  position: absolute;
+const StyledImage = styled(Image)`
+  position: absolute !important; /*ugly bomb because of gatsby-image plugin*/
   top: 0;
   right: 0;
   width: 35%;
@@ -43,14 +44,18 @@ const IndexPage = ({data}) => (
       </p>
       <Button>Wyceń projekt</Button>
     </ContentWrapper>
-    <ImageWrapper src={data.file.publicURL} />
+    <StyledImage fluid={data.file.childImageSharp.fluid}/>
   </>
 )
 
 export const query = graphql`
   {
     file(name: {eq: "hero"}) {
-      publicURL
+      childImageSharp {
+        fluid(maxWidth: 800, maxHeight: 1200, quality: 100) {
+         ...GatsbyImageSharpFluid_tracedSVG
+        }
+      }
     }
   }
 `
