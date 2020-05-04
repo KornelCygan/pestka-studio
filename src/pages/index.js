@@ -37,7 +37,6 @@ const StyledImage = styled(Image)`
 const IndexPage = ({data}) => (
   <>
     <ContentWrapper>
-      <Post />
       <h1>Projekt dla wymagających</h1>
       <p>
         Loremń ipsum dolor sit, amet consectetur adipisicing elit. 
