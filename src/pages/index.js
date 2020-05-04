@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components';
 import Image from 'gatsby-image';
 import { Button } from "../components/Button/button";
+import Post from "../components/Post/Post";
 
 const ContentWrapper = styled.div`
   width: 60%;
@@ -36,6 +37,7 @@ const StyledImage = styled(Image)`
 const IndexPage = ({data}) => (
   <>
     <ContentWrapper>
+      <Post />
       <h1>Projekt dla wymagających</h1>
       <p>
         Loremń ipsum dolor sit, amet consectetur adipisicing elit. 
