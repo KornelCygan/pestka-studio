@@ -1,19 +1,39 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react';
+import { graphql } from 'gatsby';
+import styled from 'styled-components';
 
+import ArticlesPreview from '../components/ArticlePreview/ArticlePreview';
+import PageInfo from '../components/PageInfo/PageInfo';
 
-const ArticlesPage = ({ data }) => (
-    <>
-        <h1>Articles Page</h1>
-        {data.allMdx.nodes.map(item => (
-            <>
-                <h2>{item.frontmatter.title}</h2>
-                <p>{item.frontmatter.slug}</p>
-                <p>{item.frontmatter.author}</p>
-            </>
-        ))}
-    </>
-);
+const ArticlesWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+`;
+
+const pageData = {
+    title: 'articles',
+    paragraph: '“When I’m working on a problem, I never think about beauty. But when I’ve finished, if the solution is not beautiful I know it’s wrong.” – Buckminster Fuller'
+} 
+
+const ArticlesPage = ({ data }) => {
+
+    const {allMdx: { nodes }} = data;
+
+    return (
+        <>
+            <PageInfo title={pageData.title} paragraph={pageData.paragraph}/>
+            <ArticlesWrapper>
+                {nodes.map(({excerpt, frontmatter: {title, slug, author, featuredImage}}) => (
+                    <>
+                        <ArticlesPreview title={title} excerpt={excerpt} background={featuredImage.childImageSharp.fluid.src} />
+                    </>
+                ))}
+            </ArticlesWrapper>
+            
+        </>
+    );
+}
 
 export const query = graphql`
 {
@@ -23,6 +43,13 @@ export const query = graphql`
             title
             slug
             author
+            featuredImage {
+                childImageSharp {
+                  fluid(maxWidth: 700, maxHeight: 500) {
+                    src
+                  }
+                }
+              }
         }
         excerpt(pruneLength: 50)
         }
