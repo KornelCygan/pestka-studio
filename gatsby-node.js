@@ -7,41 +7,22 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
   query queryArticles {
     allMdx {
-          nodes {
-          frontmatter {
-              title
-              slug
-              author
-              featuredImage {
-                  childImageSharp {
-                    fluid(maxWidth: 700, maxHeight: 500) {
-                      src
-                    }
-                  }
-                }
-          }
-          excerpt(pruneLength: 50)
-          }
+      nodes {
+        frontmatter {
+          slug
+        }
+        body
       }
+    }
   }
   `);
 
-  console.log(result.data.allMdx.nodes)
-
-  // Create blog post pages.
   result.data.allMdx.nodes.forEach(post => {
     createPage({
-      path: `${post.frontmatter.slug}`,
+      path: `articles/${post.frontmatter.slug}`,
       component: blogPostTemplate,
       context: {
-        // Add optional context data to be inserted
-        // as props into the page component..
-        //
-        // The context data can also be used as
-        // arguments to the page GraphQL query.
-        //
-        // The page "path" is always available as a GraphQL
-        // argument.
+        slug: post.frontmatter.slug,
       },
     })
   })
