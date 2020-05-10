@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components';
 import Image from 'gatsby-image';
 import { Button } from "../components/Button/button";
-import Post from "../components/Post/Post";
 
 const ContentWrapper = styled.div`
   width: 60%;

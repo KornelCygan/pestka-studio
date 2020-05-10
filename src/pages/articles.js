@@ -26,7 +26,7 @@ const ArticlesPage = ({ data }) => {
             <ArticlesWrapper>
                 {nodes.map(({excerpt, frontmatter: {title, slug, author, featuredImage}}) => (
                     <>
-                        <ArticlesPreview title={title} excerpt={excerpt} background={featuredImage.childImageSharp.fluid.src} />
+                        <ArticlesPreview title={title} excerpt={excerpt} image={featuredImage.childImageSharp.fluid} />
                     </>
                 ))}
             </ArticlesWrapper>
@@ -46,7 +46,7 @@ export const query = graphql`
             featuredImage {
                 childImageSharp {
                   fluid(maxWidth: 700, maxHeight: 500) {
-                    src
+                    ...GatsbyImageSharpFluid_tracedSVG
                   }
                 }
               }

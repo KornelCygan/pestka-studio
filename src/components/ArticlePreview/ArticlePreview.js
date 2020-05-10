@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Image from 'gatsby-image';
 
 const PreviewWrapper = styled.div`
     position: relative;
@@ -26,8 +27,15 @@ const PreviewInfoLabel = styled.div`
     }
 `;
 
-const ArticlePreview = ({title, excerpt, background}) => (
-    <PreviewWrapper background={background}>
+const StyledImage = styled(Image)`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
+
+const ArticlePreview = ({title, excerpt, image}) => (
+    <PreviewWrapper>
+        <StyledImage fluid={image} />
         <PreviewInfoLabel>
             <h2>{title}</h2>
             <p>{excerpt}</p>
